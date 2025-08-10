@@ -6,7 +6,7 @@ let cellValues = Array(9).fill("");
 let lastMove = -1;
 let gameRunning = true;
 let cheatedLastMove = false;
-let isFirstMove = true;
+let moveCount = 0;
 
 resetEl.addEventListener("click", resetGame);
 let wins = [
@@ -45,14 +45,15 @@ function setBoard() {
 
 function handleCellClick(cell, index) {
   if (cell.classList.contains("selected") || !gameRunning) return;
+  moveCount++;
   lastMove = index;
   cell.classList.add("selected");
   cellValues[index] = "x";
-  if (!isFirstMove) {
+  if (moveCount >= 3) {
     let random = Math.random();
+    console.log("Random chance for cheating:", random);
     if (random <= 0.4) cheatMove(lastMove);
   }
-  isFirstMove = false;
   setBoard();
   checkGameStatus();
   if (!gameRunning) return;
@@ -140,7 +141,7 @@ function resetGame() {
   lastMove = -1;
   gameRunning = true;
   cheatedLastMove = false;
-  isFirstMove = true;
+  moveCount = 0;
   resultEl.textContent = "";
   setBoard();
 }
