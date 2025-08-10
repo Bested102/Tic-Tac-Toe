@@ -52,7 +52,7 @@ function handleCellClick(cell, index) {
   if (moveCount >= 3) {
     let random = Math.random();
     console.log("Random chance for cheating:", random);
-    if (random <= 0.4) cheatMove(lastMove);
+    if (random <= 0.3) cheatMove(lastMove);
   }
   setBoard();
   checkGameStatus();
